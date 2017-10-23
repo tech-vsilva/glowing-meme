@@ -36,18 +36,9 @@ node('jenkins-slave-centos') {
                 rtGradle.deployer repo: 'ob-gradle-releases-publisher-local', server: server
                 rtGradle.run buildFile: 'build.gradle', tasks: "clean final", buildInfo: buildInfo
 
-                sh 'git checkout develop'
-                sh 'git merge release/0.x'
-                sh 'git push origin develop'
-
-                sh 'git checkout master'
-                sh 'git merge release/0.x'
-                sh 'git push origin master'
-
-                sh 'git branch -D release/0.x'
-                sh 'git push origin --delete release/0.x'
+                echo "Please finish the release/0.x branch via Git Flow now."
+                // keep retrying until release/0.x branch is not closed?
             }
-
         }
     }
 
